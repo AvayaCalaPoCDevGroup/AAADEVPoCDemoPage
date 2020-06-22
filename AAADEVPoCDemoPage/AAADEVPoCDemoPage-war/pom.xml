@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>AAADEVPoCDemoPage</artifactId>
 		<groupId>service</groupId>
-		<version>1.0.0.0.0</version>
+		<version>3.7.0.0.1</version>
 	</parent>
 
 	<artifactId>AAADEVPoCDemoPage-war</artifactId>
@@ -59,6 +59,58 @@
 			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+		<!-- <dependency>
+			<groupId>com.avaya.collaboration.api</groupId>
+			<artifactId>avaya-aura-collaboration-api-3.7</artifactId>
+			<version>3.7.0.0.370008</version>
+			<scope>provided</scope>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
+		<dependency>
+		    <groupId>com.mashape.unirest</groupId>
+		    <artifactId>unirest-java</artifactId>
+		    <version>1.4.9</version>
+		</dependency>
+				
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpmime</artifactId>
+		    <version>4.5.12</version>
+		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.5.12</version>
+		</dependency>
+
+        <!--breeze <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.3.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+            <scope>provided</scope>
+        </dependency> -->
 		<dependency>
 			<groupId>com.avaya.collaboration.api</groupId>
 			<artifactId>avaya-aura-collaboration-api-3.7</artifactId>

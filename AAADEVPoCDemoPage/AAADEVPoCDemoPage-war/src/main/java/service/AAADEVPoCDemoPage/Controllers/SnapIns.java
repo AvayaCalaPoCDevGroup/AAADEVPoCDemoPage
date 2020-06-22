@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import service.AAADEVPoCDemoPage.Entity.Collaterals;
 import service.AAADEVPoCDemoPage.Entity.Components;
 import service.AAADEVPoCDemoPage.Entity.Demo;
+import service.AAADEVPoCDemoPage.Entity.Tag;
 import service.AAADEVPoCDemoPage.Service.AaaDevPoCDemoPageImpl;
 import service.AAADEVPoCDemoPage.Util.Constants;
 import service.AAADEVPoCDemoPage.Util.ConstantsHttpResponse;
@@ -36,6 +37,7 @@ public class SnapIns extends HttpServlet {
             throws ServletException, IOException {
         JSONArray jsonArray = new JSONArray();
         List<Demo> demos = new AaaDevPoCDemoPageImpl().obtenerTodoslosDemos();
+       
         for (Demo demo : demos) {
         	
             JSONObject jsonObject = new JSONObject(new Gson().toJson(demo));
@@ -43,8 +45,11 @@ public class SnapIns extends HttpServlet {
             jsonObject.put("componentDetails", new JSONArray(new Gson().toJson(componentes)));
             List<Collaterals> collaterals = new AaaDevPoCDemoPageImpl().obtenerTodosLosCollateralsPorIdDemo(Long.toString(demo.getId()));
             jsonObject.put("collaterals", new JSONArray(new Gson().toJson(collaterals)));
-            jsonArray.put(jsonObject);
             
+            List<Tag> tags = new AaaDevPoCDemoPageImpl().obtenerTagsPorIdDemo(Long.toString(demo.getId()));
+            jsonObject.put("tags", new JSONArray(new Gson().toJson(tags)));            
+            
+            jsonArray.put(jsonObject);   
         }
         response.getWriter().println(jsonArray.toString());
     }

@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>service</groupId>
   <artifactId>AAADEVPoCDemoPage</artifactId>
-  <version>1.0.0.0.0</version>
+  <version>3.7.0.0.1</version>
   <packaging>pom</packaging>
 
   <properties>
 	  <serviceName>AAADEVPoCDemoPage</serviceName>
-	  <serviceVersion>3.7.0.0.0</serviceVersion>
+	  <serviceVersion>3.7.0.0.26</serviceVersion>
   </properties>
 
   <modules>

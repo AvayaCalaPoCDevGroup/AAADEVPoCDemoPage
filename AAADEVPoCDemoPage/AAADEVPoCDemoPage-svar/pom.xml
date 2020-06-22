@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>service</groupId>
 		<artifactId>AAADEVPoCDemoPage</artifactId>
-		<version>1.0.0.0.0</version>
+		<version>3.7.0.0.1</version>
 	</parent>
 	<artifactId>AAADEVPoCDemoPage-svar</artifactId>
 	<packaging>pom</packaging>
@@ -191,7 +191,7 @@
 		<dependency>
 			<groupId>service</groupId>
 			<artifactId>AAADEVPoCDemoPage-ear</artifactId>
-			<version>1.0.0.0.0</version>
+			<version>3.7.0.0.1</version>
 			<type>ear</type>
 		</dependency>
 		<dependency>

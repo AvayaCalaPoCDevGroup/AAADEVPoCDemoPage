@@ -30,18 +30,23 @@ public class ComponentsJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Components components) {
+    public Components create(Components components) {
         EntityManager em = null;
+        Components resp = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(components);
+            em.flush();
             em.getTransaction().commit();
+            System.out.println("el id del nuevo componente es: " + components.getId());
+            resp = components;
         } finally {
             if (em != null) {
                 em.close();
             }
         }
+        return resp;
     }
 
     public void edit(Components components) throws NonexistentEntityException, Exception {
@@ -67,8 +72,9 @@ public class ComponentsJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public boolean destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
+        boolean resp = false;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
@@ -81,11 +87,13 @@ public class ComponentsJpaController implements Serializable {
             }
             em.remove(components);
             em.getTransaction().commit();
+            resp = true;
         } finally {
             if (em != null) {
                 em.close();
             }
         }
+        return resp;
     }
 
     public List<Components> findComponentsEntities() {

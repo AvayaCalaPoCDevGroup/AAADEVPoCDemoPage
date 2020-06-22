@@ -1,16 +1,19 @@
 package service.AAADEVPoCDemoPage.Dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import service.AAADEVPoCDemoPage.Dao.Exceptions.NonexistentEntityException;
+import service.AAADEVPoCDemoPage.Entity.Components;
 import service.AAADEVPoCDemoPage.Entity.Demo;
 
 /**
@@ -19,7 +22,12 @@ import service.AAADEVPoCDemoPage.Entity.Demo;
  */
 public class DemoJpaController implements Serializable {
 
-    public DemoJpaController(EntityManagerFactory emf) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public DemoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -30,16 +38,17 @@ public class DemoJpaController implements Serializable {
 
     public void create(Demo demo) {
         EntityManager em = null;
-        try {
+//        try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(demo);
+            em.flush();
             em.getTransaction().commit();
-        } finally {
+//        } finally {
             if (em != null) {
                 em.close();
             }
-        }
+//        }
     }
 
     public void edit(Demo demo) throws NonexistentEntityException, Exception {
@@ -65,8 +74,9 @@ public class DemoJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public boolean destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
+        boolean resp = false;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
@@ -79,11 +89,14 @@ public class DemoJpaController implements Serializable {
             }
             em.remove(demo);
             em.getTransaction().commit();
+            resp = true;
         } finally {
             if (em != null) {
                 em.close();
             }
         }
+        
+        return resp;
     }
 
     public List<Demo> findDemoEntities() {
@@ -95,19 +108,26 @@ public class DemoJpaController implements Serializable {
     }
 
     private List<Demo> findDemoEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Demo.class));
-            Query q = em.createQuery(cq);
-            if (!all) {
-                q.setMaxResults(maxResults);
-                q.setFirstResult(firstResult);
-            }
-            return q.getResultList();
-        } finally {
-            em.close();
+//        EntityManager em = getEntityManager();
+//        try {
+//            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+//            cq.select(cq.from(Demo.class));
+//            Query q = em.createQuery(cq);
+//            if (!all) {
+//                q.setMaxResults(maxResults);
+//                q.setFirstResult(firstResult);
+//            }
+//            return q.getResultList();
+//        } finally {
+//            em.close();
+//        }
+    	EntityManager em = getEntityManager();
+        TypedQuery<Demo> namedQuery = em.createNamedQuery("Demo.findAll", Demo.class);
+        List<Demo> result = namedQuery.getResultList();
+        if (!result.isEmpty()) {
+            return result;
         }
+        return new ArrayList<>();
     }
 
     public Demo findDemo(Long id) {
