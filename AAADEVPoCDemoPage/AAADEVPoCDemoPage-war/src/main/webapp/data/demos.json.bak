@@ -1,0 +1,78 @@
+[
+    {
+        "id": 1,
+        "title": "Natural Language IVR",
+        "description": "<p>It is an IVR that responds to voice commands, is made on breeze and uses artificial intelligence engines for biometric audio authentication, tspeech to text and text to speech, voice recognition, emotion detection.</p>",
+        "isActive": true,
+        "isExpired": false,
+        "activatedTime": "2020-02-26T23:47:26.000+0000",
+        "expiredTime": null,
+        "componentDetails": "<ul><li>Avaya Aura Platform</li><li>Avaya Breeze</li></ul>",
+        "connectivityDetails": "<a href=\"https://breeze2-132.collaboratory.avaya.com/services/AAADEVNaturalLanguageIVR/ControlPad\">Natural Language IVR</a>",
+        "isNew": false,
+        "collaterals": [
+            {
+                "id": 227,
+                "title": "Avaya IX Workplace Demo Guide",
+                "description": null,
+                "link": "https://experience.avaya.com/images/AEP/MEDIA/DSS/COLLATERALS/227_Avaya_IX_Workplace_EA_DemoGuide.pdf",
+                "sortOrder": 1,
+                "isActive": true,
+                "collateralType": {
+                    "id": 1,
+                    "name": "Demo Guide(s)",
+                    "sortOrder": 5
+                },
+                "region": {
+                    "id": 99,
+                    "name": "ALL"
+                },
+                "createdTime": "2020-01-01T20:55:24.000+0000",
+                "updatedTime": "2020-05-11T18:57:14.000+0000",
+                "new": false
+            }
+        ],
+        "demoSolutions": null,
+        "createdTime": "2019-12-04T13:41:25.000+0000",
+        "updatedTime": "2020-05-11T19:16:18.000+0000",
+        "solutionName": "Unified Communications"
+    },
+    {
+        "id": 2,
+        "title": "Hotel Avaya",
+        "description": "<p>Integration of Breeze with SMCC + Yoizen, serving a customer interested in booking a room from Messenger, the reservation is saved in Breeze. Later it is possible to send personalized proactive notifications to the guest by SMS and eMail</p><p>&nbsp;</p>",
+        "isActive": true,
+        "isExpired": false,
+        "activatedTime": "2020-02-26T23:47:26.000+0000",
+        "expiredTime": null,
+        "componentDetails": "<ul><li>Avaya Aura Platform</li><li>Avaya Breeze</li></ul>",
+        "connectivityDetails": "<a href=\"https://breeze2-132.collaboratory.avaya.com/services/AAADEVHotelAvaya/HotelAvaya\">Hotel Avaya</a>",
+        "isNew": false,
+        "collaterals": [
+            {
+                "id": 227,
+                "title": "Avaya IX Workplace Demo Guide",
+                "description": null,
+                "link": "https://experience.avaya.com/images/AEP/MEDIA/DSS/COLLATERALS/227_Avaya_IX_Workplace_EA_DemoGuide.pdf",
+                "sortOrder": 1,
+                "isActive": true,
+                "collateralType": {
+                    "id": 1,
+                    "name": "Demo Guide(s)",
+                    "sortOrder": 5
+                },
+                "region": {
+                    "id": 99,
+                    "name": "ALL"
+                },
+                "createdTime": "2020-01-01T20:55:24.000+0000",
+                "updatedTime": "2020-05-11T18:57:14.000+0000",
+                "new": false
+            }
+        ],
+        "demoSolutions": null,
+        "createdTime": "2019-12-04T13:41:25.000+0000",
+        "updatedTime": "2020-05-11T19:16:18.000+0000",
+        "solutionName": "Unified Communications"
+    }
+]

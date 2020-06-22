@@ -1,0 +1,43 @@
+[
+    {
+        "id": 1,
+        "title": "Natural Language IVR",
+        "description": "It is an IVR that responds to voice commands, is made on breeze and uses artificial intelligence engines for biometric audio authentication, tspeech to text and text to speech, voice recognition, emotion detection.",
+        "componentDetails": [
+            {
+                "id" : 1,
+                "iddemo" : 1,
+                "name" : "Avaya Aura Platform"
+            },
+            {
+                "id" : 2,
+                "iddemo" : 1,
+                "name" : "Avaya Breeze"
+            }
+        ],
+        "link": "https://breeze2-132.collaboratory.avaya.com/services/AAADEVNaturalLanguageIVR/ControlPad",
+        "collaterals": [
+            {
+                "id": 227,
+                "type": "Demo Guide",
+                "title": "Avaya IX Workplace Demo Guide",
+                "link": "https://experience.avaya.com/images/AEP/MEDIA/DSS/COLLATERALS/227_Avaya_IX_Workplace_EA_DemoGuide.pdf",
+                "updatedtime": "2020-05-11 18:57:14",
+                "iddemo":1  
+            }
+        ],
+        "tags":[
+            {
+                "id":1,
+                "name":"Hospitality",
+                "iddemo":1
+            },
+            {
+                "id":2,
+                "name":"Vantage",
+                "iddemo":1
+            }
+        ],
+        "updatedtime": "2020-05-11 19:16:18"
+    }
+]

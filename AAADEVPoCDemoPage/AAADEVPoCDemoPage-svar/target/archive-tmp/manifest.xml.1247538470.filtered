@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service_description xmlns="http://archiveschemas.aus.avaya.com/aus"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://archiveschemas.aus.avaya.com/aus aus.xsd"
+    name="AAADEVPoCDemoPage" version="3.7.0.0.26"
+    sdk_version="3.7" sdk_build="3.7.0.0.370008">
+	<component type="properties" filename="properties.xml" />
+	<component type="servlet" filename="AAADEVPoCDemoPage-ear-3.7.0.0.1.ear" />
+	<!-- Please remove this if you do not have an EULA associated to your snap-in -->
+	<component type="eula" filename="eula.txt" />
+</service_description>
