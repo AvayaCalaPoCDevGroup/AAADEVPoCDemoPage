@@ -117,7 +117,8 @@ public class LogInActions {
                 session.setAttribute("UserBeanSession", userBeanSession);
                 //CREACIÓN DE SESSION Y COOKIE
                 Cookie cookieTokenAccess = new Cookie("JWT", userBeanSession.getJWTAccess());
-                cookieTokenAccess.setMaxAge(-1);  //INDICAMOS QUE LA COOKIE DURE LA SESSIÓN DEL BROWSER
+                cookieTokenAccess.setMaxAge(30*60000);  //INDICAMOS QUE LA COOKIE DURE LA SESSIÓN DEL BROWSER
+                cookieTokenAccess.setPath("/");
                 removeCookie(request);
                 /*new LoggerSnapIn(
 						Constants.SNAP_IN,
@@ -158,7 +159,7 @@ public class LogInActions {
             System.out.println("LoginActions Decrypt text: " + decryptedText);
             return decryptedText;
         } catch (Exception ex) {
-        	System.out.println("LoginActions Decrypt CACTH text: " + decryptedText);
+        	System.out.println("LoginActions Decrypt CACTH text: " + ex.getMessage());
             return decryptedText;
         }
     }
@@ -218,13 +219,13 @@ public class LogInActions {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("cookieName")) {
                     //do something
                     //value can be retrieved using #cookie.getValue()
                     if (cookie.getName().equals("JWT")) {
                         cookie.setMaxAge(0);             //ELIMINAMOS LA COOKIE
+                        cookie.setPath("/");
+                        response.addCookie(cookie);
                     }
-                }
             }
         }
 

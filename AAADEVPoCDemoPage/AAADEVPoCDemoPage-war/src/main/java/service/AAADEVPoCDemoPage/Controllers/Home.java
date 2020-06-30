@@ -37,7 +37,7 @@ public class Home extends BaseController {
 		if (userBeanSession == null) {
 			System.out.println("Home -> doGet, No have session");
 			request.setAttribute("isLogged", false);
-			removeCookie(request);
+			removeCookie(request, response);
 		} else {
 			System.out.println("Home -> doGet, Have session");
 			request.setAttribute("isLogged", true);

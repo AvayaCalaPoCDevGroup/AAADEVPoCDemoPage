@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="mt" tagdir="/WEB-INF/tags"%>
-<mt:masterpage title="Demos">
+<mt:masterpage title="Demos"  menuid="menuDemos">
 	<jsp:attribute name="content">
 		<div id="container">
 		    <div id="demosContainer">

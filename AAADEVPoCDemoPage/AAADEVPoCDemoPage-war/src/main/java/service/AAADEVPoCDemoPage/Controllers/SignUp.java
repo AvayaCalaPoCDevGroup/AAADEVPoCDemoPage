@@ -53,8 +53,8 @@ public class SignUp extends BaseController {
 					.replace(Constants.MAILPART_CIUDAD, registerRequest.ciudad);
 					
 			new MailUtils(Constants.SMTP_USER, 
-					//new String[] {"jlramirez@avaya.com", "umansilla@avaya.com", "martinez71@avaya.com", registerRequest.correo},
-					new String[] {"martinez71@avaya.com", registerRequest.correo},
+					new String[] {"jlramirez@avaya.com", "umansilla@avaya.com", "martinez71@avaya.com", registerRequest.correo},
+					//new String[] {"martinez71@avaya.com", registerRequest.correo},
 					mailtext, 
 					"Solicitud de acceso a pagina de demos", null).Send();
 			response.getWriter().println(Constants.HTTP_RESPONSE_LOGIN_OK_AUTHORIZED);

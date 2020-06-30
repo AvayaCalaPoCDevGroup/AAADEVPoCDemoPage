@@ -1,6 +1,7 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ attribute name="title" required="true" rtexprvalue="true"%>
+<%@ attribute name="menuid" required="true" rtexprvalue="true"%>
 <%@ attribute name="content" fragment="true"%>
 <html lang="en">
 
@@ -21,6 +22,21 @@
 </head>
 
 <body>
+	<!-- Toast de notificaciones -->
+	<!-- <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;"> -->
+	  <div class="toast" style="position: absolute; bottom: 30; right: 10; font-size: 30px;">
+	    <div class="toast-header" style="background-color: #333333">
+	      <img src="images/logo.png" width=40px class="rwhiteounded mr-2" alt="Avaya">
+	      <strong id="titleToast" class="mr-auto" style="color: white;">Bootstrap</strong>
+	      <!-- <small>11 mins ago</small> -->
+	      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+	        <span aria-hidden="true">&times;</span>
+	      </button>
+	    </div>
+	    <div id="contentToast" class="toast-body">
+	      Registro creado correctamente
+	    </div>
+	  </div>
 	<script
 		src="https://cdn.cookielaw.org/consent/da235a6b-8230-462c-8f13-eccb4ce4537b.js"
 		type="text/javascript" charset="UTF-8"></script>
@@ -31,13 +47,14 @@
 		<section class="ant-layout ant-layout-has-sider">
 			<div>
 				<aside
+					id="sideBarMenu"
 					class="navigation-menu ant-layout-sider ant-layout-sider-light ant-layout-sider-has-trigger"
-					style="flex: 0 0 250px; max-width: 250px; min-width: 250px; width: 250px;">
+					style="flex: 0 0 250px; width: 250px;">
 					<div class="ant-layout-sider-children">
 						<div>
 							<img src="images/logo.png" alt="logo">
 							<p class="logo-text bottom-spacing-4">
-								<span class="large-text">CALA PoC Dev Team<br>Demo
+								<span id="menuHeadTitle" class="large-text">CALA PoC Dev Team<br>Demo
 									Page
 								</span>
 							</p>
@@ -45,7 +62,7 @@
 						<ul
 							class="ant-menu menu ant-menu-light ant-menu-root ant-menu-inline"
 							role="menu">
-							<li class="ant-menu-item" role="menuitem"
+							<li id="menuHome" class="ant-menu-item" role="menuitem"
 								style="padding-left: 24px;"><a href="Home"> <span>
 										<i class="fas fa-home"></i> <i class="anticon"
 										style="margin-right: 20px; vertical-align: text-bottom;"><svg
@@ -79,7 +96,7 @@
 										</a></li>
 									</ul>
 								</li> -->
-								<li class="ant-menu-item" role="menuitem"
+								<li id="menuDemos" class="ant-menu-item" role="menuitem"
 									style="padding-left: 24px;"><a href="Demos"> <span>
 											<i class="fas fa-toolbox"></i> <i class="anticon"
 											style="margin-right: 20px; vertical-align: text-bottom;"><svg
@@ -89,26 +106,37 @@
 									</span></a></li>
 							</c:if>
 							<c:if test="${sessionScope.UserBeanSession.rol == 'SADMIN'}">
-								<li class="ant-menu-item" role="menuitem"
+									<li id="menuAdmin" class="ant-menu-item" role="menuitem"
 									style="padding-left: 24px;"><a href="Demos?p=admin"> <span>
-											<i class="fas fa-tools"></i> <i class="anticon"
+											<i class="fas fa-tools"></i><i class="anticon"
 											style="margin-right: 20px; vertical-align: text-bottom;"><svg
 													xmlns="http://www.w3.org/2000/svg" width="25"
 													fill="currentColor" viewBox="0 0 149.98 150"></svg></i> <span
 											class=" large-text">Admin</span>
+									</span></a></li>									
+									<li id="menuManageUsers" class="ant-menu-item" role="menuitem"
+									style="padding-left: 24px;"><a href="RegisterController"> <span>
+											<i class="fas fa-user-cog"></i><i class="anticon"
+											style="margin-right: 20px; vertical-align: text-bottom;"><svg
+													xmlns="http://www.w3.org/2000/svg" width="25"
+													fill="currentColor" viewBox="0 0 149.98 150"></svg></i> <span
+											class=" large-text">Manage Users</span>
+									</span></a></li>
+							</c:if>
+							<c:if test="${sessionScope.UserBeanSession.rol == 'SADMIN' || sessionScope.UserBeanSession.userName == 'mtorres@avaya.com' || sessionScope.UserBeanSession.userName == 'gtanoira@avaya.com'}">
+									<li id="menu" class="ant-menu-item" role="menuitem"
+									style="padding-left: 24px;"><a href="https://breeze2-196.collaboratory.avaya.com/services/AAADEVOAuth2/AccessHistory" target="_blank"> <span>
+											<i class="fa fa-chart-bar" aria-hidden="true"></i> <i class="anticon"
+											style="margin-right: 20px; vertical-align: text-bottom;"><svg
+													xmlns="http://www.w3.org/2000/svg" width="25"
+													fill="currentColor" viewBox="0 0 149.98 150"></svg></i> <span
+											class=" large-text">Statistics</span>
 									</span></a></li>
 							</c:if>
 						</ul>
 					</div>
-					<div class="ant-layout-sider-trigger" style="width: 250px;">
-						<i aria-label="icon: left" class="anticon anticon-left"><svg
-								viewBox="64 64 896 896" focusable="false" class=""
-								data-icon="left" width="1em" height="1em" fill="currentColor"
-								aria-hidden="true">
-                                <path
-									d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z">
-                                </path>
-                            </svg></i>
+					<div id="btnToogleMenu" class="ant-layout-sider-trigger" style="width: 250px;">
+						<i id="btnToogleIcon" class="fa fa-chevron-left" aria-hidden="true"></i>
 					</div>
 				</aside>
 			</div>
@@ -171,7 +199,7 @@
 				
 				<footer class="footer ant-layout-footer">
 					<div class="ant-row right-align">
-						<span class="paragraph">© 2020 Avaya, Inc.   Ver 3.7.0.0.26</span><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a
+						<span class="paragraph">© 2020 Avaya, Inc.   Ver 3.7.0.0.46</span><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a
 							class="optanon-toggle-display cookie-settings-button link"
 							href="# " title="Cookie Statement" aria-label="Cookie Statement"
 							tabindex="1">Cookie Statement</a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><span><a
@@ -193,7 +221,7 @@
 	        </button>
 	      </div>
 	      <div class="modal-body col-md-12 col-xs-12">
-	        <p class="col-md-12 col-xs-12">Please fill out the registration form, we will contact you as soon as we validate the information</p>
+	        <p class="col-md-12 col-xs-12"><b>Please fill out the registration form, we will contact you as soon as we validate the information</b></p>
 	        <form role="form"
 							class="form-horizontal reg-form needs-validation col-md-12 col-xs-12"
 							novalidate="true">
@@ -203,7 +231,11 @@
 									style="margin-bottom: 12px;">
 									<div>
 										<!--<label class ="visually-hidden"><span class="data-label"></span></label>-->
+										<label class="placeholder-label js-label" aria-hidden="true"><span
+											class="data-label" style="float: right;"><b>First Name</b></span><span
+											style="float: right;" class="required data-required text-danger">*</span></label>
 										<input type="text"
+											placeholder="Enter First Name"
 											class="form-control input-sm js-input data-input validationInput"
 											data-toggle="tooltip" data-placement="bottom"
 											data-trigger="manual" maxlength="500" name="inputName"
@@ -215,9 +247,6 @@
 											<div class="tooltip-arrow"></div>
 											<div class="tooltip-inner">This is a required field</div>
 										</div>
-										<label class="placeholder-label js-label" aria-hidden="true"><span
-											class="data-label" style="float: right;">First Name</span><span
-											style="float: right;" class="required data-required text-danger">*</span></label>
 									</div>
 								</div>
 								<div class="has-feedback reg-field col-xs-12 col-md-12"
@@ -225,7 +254,13 @@
 									<div>
 
 										<!--<label class ="visually-hidden"><span class="data-label"></span></label>-->
+										<label class="placeholder-label js-label" aria-hidden="true">
+											<span class="data-label" style="float: right;"><b>Last
+												Name</b></span><span style="float: right;"
+											class="required data-required text-danger">*</span>
+										</label>
 										<input type="text"
+											placeholder="Enter Last Name"
 											class="form-control input-sm js-input data-input validationInput"
 											data-toggle="tooltip" data-placement="bottom"
 											data-trigger="manual" maxlength="500" name="inputApellido"
@@ -237,18 +272,18 @@
 											<div class="tooltip-arrow"></div>
 											<div class="tooltip-inner">This is a required field</div>
 										</div>
-										<label class="placeholder-label js-label" aria-hidden="true">
-											<span class="data-label" style="float: right;">Last
-												Name</span><span style="float: right;"
-											class="required data-required text-danger">*</span>
-										</label>
 									</div>
 								</div>
 								<div class="has-feedback reg-field col-xs-12 col-md-12"
 									style="margin-bottom: 12px;">
 									<div>
 										<!--<label class ="visually-hidden"><span class="data-label"></span></label>-->
+										<label class="placeholder-label js-label" aria-hidden="true">
+											<span class="data-label" style="float: right;"><b>Email</b></span><span
+											style="float: right;" class="required data-required text-danger">*</span>
+										</label>
 										<input type="email"
+											placeholder="Enter email"
 											class="form-control input-sm js-input data-input validationInput"
 											data-toggle="tooltip" data-placement="bottom"
 											data-trigger="manual" maxlength="500" name="inputEmail"
@@ -260,10 +295,6 @@
 											<div class="tooltip-arrow"></div>
 											<div class="tooltip-inner">This is a required field</div>
 										</div>
-										<label class="placeholder-label js-label" aria-hidden="true">
-											<span class="data-label" style="float: right;">Email</span><span
-											style="float: right;" class="required data-required text-danger">*</span>
-										</label>
 									</div>
 								</div>
 								
@@ -272,7 +303,14 @@
 									<div>
 
 										<!--<label class ="visually-hidden"><span class="data-label"></span></label>-->
+										<label class="placeholder-label js-label" aria-hidden="true">
+											<span class="data-label" style="float: right;"><b>Mobile
+												Phone</b></span>
+											<span style="float: right;"
+											class="required data-required text-danger">*</span>
+										</label>
 										<input type="text"
+											placeholder="Enter Phone"
 											class="form-control input-sm js-input data-input validationInput"
 											data-toggle="tooltip" data-placement="bottom"
 											data-trigger="manual" maxlength="500" name="phoneMovil"
@@ -284,12 +322,6 @@
 											<div class="tooltip-arrow"></div>
 											<div class="tooltip-inner">This is a required field</div>
 										</div>
-										<label class="placeholder-label js-label" aria-hidden="true">
-											<span class="data-label" style="float: right;">Mobile
-												Phone</span>
-											<span style="float: right;"
-											class="required data-required text-danger">*</span>
-										</label>
 									</div>
 								</div>
 								
@@ -298,7 +330,13 @@
 									<div>
 
 										<!--<label class ="visually-hidden"><span class="data-label"></span></label>-->
+										<label class="placeholder-label js-label" aria-hidden="true">
+											<span style="float: right;"
+											class="data-label"><b>Country</b></span>
+											<span
+											class="required data-required text-danger" style="float: right;">*</span></label>
 										<input type="text"
+											placeholder="Enter Country"
 											class="form-control input-sm js-input data-input validationInput"
 											data-toggle="tooltip" data-placement="bottom"
 											data-trigger="manual" maxlength="500" name="inputCiudad"
@@ -310,11 +348,6 @@
 											<div class="tooltip-arrow"></div>
 											<div class="tooltip-inner">This is a required field</div>
 										</div>
-										<label class="placeholder-label js-label" aria-hidden="true">
-											<span style="float: right;"
-											class="data-label">City</span>
-											<span
-											class="required data-required text-danger" style="float: right;">*</span></label>
 									</div>
 								</div>
 								
@@ -353,24 +386,15 @@
 	  </div>
 	</div>
 	
-	<!-- Toast de notificaciones -->
-	<!-- <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;"> -->
-	  <div class="toast" style="position: absolute; bottom: 30; right: 10; font-size: 30px">
-	    <div class="toast-header" style="background-color: #333333">
-	      <img src="images/logo.png" width=40px class="rwhiteounded mr-2" alt="Avaya">
-	      <strong id="titleToast" class="mr-auto" style="color: white;">Bootstrap</strong>
-	      <!-- <small>11 mins ago</small> -->
-	      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-	        <span aria-hidden="true">&times;</span>
-	      </button>
-	    </div>
-	    <div id="contentToast" class="toast-body">
-	      Registro creado correctamente
-	    </div>
-	  </div>
+	
+	  <div id="currentMenuId" style="display: none;">${menuid }</div>
 	<!-- </div> -->
 	<script>var d = new Date; d.setFullYear(d.getFullYear() + 1, d.getMonth(), d.getDay()); var expires = "expires=" + d.toUTCString(); function addConsentCookies() { document.cookie = "OptanonAlertBoxClosed=true; " + expires }
         setTimeout(function () { document.querySelector(".accept-cookies-button").addEventListener("click", addConsentCookies, !1) }, 1e3)
+    </script>
+    <script type="text/javascript">
+    	var currentMenuId = document.getElementById('currentMenuId').innerHTML; 
+    	document.getElementById(currentMenuId).classList.add("ant-menu-item-selected");
     </script>
 	<script>!function (p) { function e(e) { for (var r, t, n = e[0], o = e[1], u = e[2], l = 0, a = []; l < n.length; l++)t = n[l], Object.prototype.hasOwnProperty.call(i, t) && i[t] && a.push(i[t][0]), i[t] = 0; for (r in o) Object.prototype.hasOwnProperty.call(o, r) && (p[r] = o[r]); for (s && s(e); a.length;)a.shift()(); return c.push.apply(c, u || []), f() } function f() { for (var e, r = 0; r < c.length; r++) { for (var t = c[r], n = !0, o = 1; o < t.length; o++) { var u = t[o]; 0 !== i[u] && (n = !1) } n && (c.splice(r--, 1), e = l(l.s = t[0])) } return e } var t = {}, i = { 1: 0 }, c = []; function l(e) { if (t[e]) return t[e].exports; var r = t[e] = { i: e, l: !1, exports: {} }; return p[e].call(r.exports, r, r.exports, l), r.l = !0, r.exports } l.m = p, l.c = t, l.d = function (e, r, t) { l.o(e, r) || Object.defineProperty(e, r, { enumerable: !0, get: t }) }, l.r = function (e) { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }) }, l.t = function (r, e) { if (1 & e && (r = l(r)), 8 & e) return r; if (4 & e && "object" == typeof r && r && r.__esModule) return r; var t = Object.create(null); if (l.r(t), Object.defineProperty(t, "default", { enumerable: !0, value: r }), 2 & e && "string" != typeof r) for (var n in r) l.d(t, n, function (e) { return r[e] }.bind(null, n)); return t }, l.n = function (e) { var r = e && e.__esModule ? function () { return e.default } : function () { return e }; return l.d(r, "a", r), r }, l.o = function (e, r) { return Object.prototype.hasOwnProperty.call(e, r) }, l.p = "/"; var r = this.webpackJsonpae_portal = this.webpackJsonpae_portal || [], n = r.push.bind(r); r.push = e, r = r.slice(); for (var o = 0; o < r.length; o++)e(r[o]); var s = n; f() }([])</script>
 	<!-- <script src="js/2.7e0fb75c.chunk.js"></script>

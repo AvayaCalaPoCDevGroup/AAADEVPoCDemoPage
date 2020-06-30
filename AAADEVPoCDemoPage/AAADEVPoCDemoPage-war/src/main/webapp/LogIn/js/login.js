@@ -21,8 +21,8 @@ document.cookie = "JWT= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 document.getElementById('submitbtn').addEventListener('click', function (e) {
 
     e.preventDefault();
-    document.getElementById('loaderDisplay').classList.add('is-active');
-    document.getElementById("loaderDisplay").setAttribute("data-text", "Validando Información");
+    var loaderd = document.getElementById('loaderDisplay'); 
+    
 
     console.log("Submit");
     var email = validateEmail(document.getElementById('email').value);
@@ -54,12 +54,14 @@ document.getElementById('submitbtn').addEventListener('click', function (e) {
             text: 'Please enter the password'
         });
     } else {
+    	loaderd.classList.add('is-active');
+        loaderd.setAttribute("data-text", "Validando Información");
         var data = new FormData();
         data.append("action", "LogIn");
-        data.append("Email", CryptoJS.AES.encrypt(document.getElementById('email').value, "AAADEVAvayaOmnichannel"));
-        data.append("Pass", CryptoJS.AES.encrypt(document.getElementById('pass').value, "AAADEVAvayaOmnichannel"));
-        data.append("Cliente", CryptoJS.AES.encrypt(document.getElementById('cliente').value, "AAADEVAvayaOmnichannel"));
-        data.append("Pais", CryptoJS.AES.encrypt(document.getElementById('country').value, "AAADEVAvayaOmnichannel"));
+        data.append("Email", CryptoJS.AES.encrypt(document.getElementById('email').value, "AAADEVPocDemoPag"));
+        data.append("Pass", CryptoJS.AES.encrypt(document.getElementById('pass').value, "AAADEVPocDemoPag"));
+        data.append("Cliente", CryptoJS.AES.encrypt(document.getElementById('cliente').value, "AAADEVPocDemoPag"));
+        data.append("Pais", CryptoJS.AES.encrypt(document.getElementById('country').value, "AAADEVPocDemoPag"));
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = false;
         xhr.addEventListener("readystatechange", function () {
@@ -98,10 +100,19 @@ document.getElementById('submitbtn').addEventListener('click', function (e) {
 
 });
 
-document.getElementById('forgotten').addEventListener('click', function (e) {
-    e.preventDefault();
-    console.log("Forgotten");
-});
+//document.getElementById('forgotten').addEventListener('click', function (e) {
+//    e.preventDefault();
+//    console.log("Forgotten");
+//});
+document.getElementById('pass').addEventListener("keyup", function(event) {
+	  // Number 13 is the "Enter" key on the keyboard
+	  if (event.keyCode === 13) {
+	    // Cancel the default action, if needed
+	    event.preventDefault();
+	    // Trigger the button element with a click
+	    document.getElementById("submitbtn").click();
+	  }
+	});
 
 
 function validateEmail(email) {

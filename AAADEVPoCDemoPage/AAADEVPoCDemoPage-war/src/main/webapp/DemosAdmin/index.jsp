@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="mt" tagdir="/WEB-INF/tags"%>
-<mt:masterpage title="Demos">
+<mt:masterpage title="Demos"  menuid="menuAdmin">
 	<jsp:attribute name="content">
 		<div id="container">
 		    <div id="demosContainer">
@@ -50,8 +50,8 @@
 		<div class="modal fade" id="modalNewDemo" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title">New Demo</h5>
+		      <div id="modalDemoHead" class="modal-header">
+		        <h5 id="modalDemoTitle" class="modal-title">New Demo</h5>
 		        <button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 		          <span aria-hidden="true">&times;</span>

@@ -3,7 +3,7 @@
  */
 function renderDemos(demoList, target, callback){
     demoList.forEach(element => {
-        var strhtml =   '<div class="ant-card responsive-container vertical-spacing  ant-card-bordered">'                                                                                                                                                                                                                                                                                                                                       
+        var strhtml =   '<div class="ant-card responsive-container vertical-spacing  ant-card-bordered" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">'                                                                                                                                                                                                                                                                                                                                       
                         +'    <div class="ant-card-body">'
                         +'        <div class="ant-row" style="margin-left: -24px; margin-right: -24px;">'
                         +'            <div class="ant-col ant-col-xl-24" style="padding-left: 24px; padding-right: 24px;">'
@@ -68,7 +68,7 @@ function renderDemos(demoList, target, callback){
                         +'                                    </path>'
                         +'                                </svg></i></span></span>'
                         +'                    <div class="ant-tabs-nav-wrap">'
-                        +'                        <div class="ant-tabs-nav-scroll">'
+                        +'                        <div class="ant-tabs-nav-scroll" style="overflow-x: auto;">'
                         +'                            <div class="ant-tabs-nav ant-tabs-nav-animated">'
                         +'                                <!-- aqui guardo el id del contenedor para los detalles de los tabs id=demoX-->'
                         +'                                <div aria-controls="demo'+ element.id +'">'
@@ -132,12 +132,17 @@ function renderDemos(demoList, target, callback){
                         +'                    class="ant-tabs-tabpane ant-tabs-tabpane-inactive scrollable-tab-content">'
                         +'                    <div class="html-container text-color">'
                         +'                        <!-- ACCESS -->'
-                        +'						<a href=' + element.link + ' target="_blank">'+element.link + '</a>'
+                        +'						<a type="button" class="btn btn-success" href=' + element.link + ' target="_blank">Go to the demo '+ element.title +'</a>'
                         +'                    </div>'
                         +'                </div>'
                         +'                <div id="contentab3" role="tabpanel" aria-hidden="true" class="ant-tabs-tabpane ant-tabs-tabpane-inactive scrollable-tab-content">'
                         +'                    <!-- COLLATERALLS -->'
+                        +'					<div class="listaCollaterals">'
                         + renderCollaterals(element.collaterals)
+                        +'					</div>'
+                        +'					<button data-iddemo='+element.id+' data-tipo="tag" type="button" class="ml-4 btn btn-success addCollateral">'
+                        +'					<i class="fa fa-plus"></i>'
+                        +'					</button>'
                         +'                </div>'
                         +'                <div id="contentab4" role="tabpanel" aria-hidden="true"'
                         +'                    class="ant-tabs-tabpane ant-tabs-tabpane-inactive scrollable-tab-content">'
@@ -202,7 +207,7 @@ function renderTags(tagList){
 function renderCollaterals(collaterallList){
     var resp = "";
     collaterallList.forEach(element => {
-        resp += '<div class="ant-card vertical-spacing ant-card-bordered ant-card-type-inner">'
+        resp += '<div id="collateral'+element.id+'" class="ant-card vertical-spacing ant-card-bordered ant-card-type-inner">'
                 +'    <div class="ant-card-head">'
                 +'        <div class="ant-card-head-wrapper">'
                 +'            <div class="ant-card-head-title">'+element.type+'</div>'
@@ -218,9 +223,12 @@ function renderCollaterals(collaterallList){
                 +'                                <div class="ant-list-item-meta-content">'
                 +'                                    <h4 class="ant-list-item-meta-title">'
                 +'                                        <a class="link"'
-                +'                                            href="'+element.link+'"'
-                +'                                            rel="noopener noreferrer" target="_blank">'
+                +'                                            rel="noopener noreferrer" >'
                 +'                                            '+element.title+'</a>'
+                +'											<a class="ml-4 btn btn-primmary" href="Demos?i='+element.id+'" target="_blank">'
+                +'											<i class="fa fa-download"></i></a>'
+                +'											<button type="button" class="ml-4 btn btn-danger deleteCollateral" data-id="'+element.id+'" data-iddemo="'+element.iddemo+'" data-padre="collateral'+element.id+'">'
+                +'											<i class="fa fa-trash"></i></Button>'
                 +'                                        <span class="ant-tag ant-tag-has-color float-right"'
                 +'                                            style="background-color: rgb(109, 181, 236);">'
                 +'                                            Updated: '+element.updatedtime+'</span>'

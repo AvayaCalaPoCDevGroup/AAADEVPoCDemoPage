@@ -8,7 +8,7 @@
 
   <properties>
 	  <serviceName>AAADEVPoCDemoPage</serviceName>
-	  <serviceVersion>3.7.0.0.26</serviceVersion>
+	  <serviceVersion>3.7.0.0.46</serviceVersion>
   </properties>
 
   <modules>

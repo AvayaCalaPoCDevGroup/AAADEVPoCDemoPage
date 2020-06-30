@@ -19,6 +19,9 @@ public interface IAaaDevPoCDemoPage {
      */
     List<Collaterals> obtenerTodoslosCollaterals();
     List<Collaterals> obtenerTodosLosCollateralsPorIdDemo(String idDemo);
+    Collaterals crearColateral(Collaterals collateral);
+    Collaterals getByIdDemoAndId(Long id);
+    boolean deleteCollateral(Long id);
     /*
     Components
      */

@@ -40,6 +40,7 @@ function showToast(title, content, duration){
 	titleToast.innerHTML = title;
 	contentToast.innerHTML = content;
 	
+	$('.toast').css('z-index', 3000);
 	$('.toast').toast({animation:true, autohide : true, delay : duration});
 	$('.toast').toast('show');
 }

@@ -24,17 +24,19 @@ public class BaseController extends HttpServlet {
 		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With");
 	}
 
-	protected void removeCookie(HttpServletRequest request) {
+	protected void removeCookie(HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("cookieName")) {
+				
 					// do something
 					// value can be retrieved using #cookie.getValue()
-					if (cookie.getName().equals("JWT")) {
-						cookie.setMaxAge(0); // ELIMINAMOS LA COOKIE
-					}
-				}
+				if (cookie.getName().equals("JWT")) {
+                    cookie.setMaxAge(0);             //ELIMINAMOS LA COOKIE
+                    cookie.setPath("/");
+                    response.addCookie(cookie);
+                }
+				
 			}
 		}
 

@@ -56,6 +56,16 @@ function agregarListeners(){
     deleteTags.forEach(btn => {
     	btn.addEventListener("click", deleteComponentOrTagListener);
     });
+    
+    const addColaterall = document.querySelectorAll('.addCollateral');
+    addColaterall.forEach(btn => {
+    	btn.addEventListener("click", addCollareralListener);
+    });  
+    
+    const deleteColaterall = document.querySelectorAll('.deleteCollateral');
+    deleteColaterall.forEach(btn => {
+    	btn.addEventListener("click", deleteCollareralListener);
+    });  
 }
 
 

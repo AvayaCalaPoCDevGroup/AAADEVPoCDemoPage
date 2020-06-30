@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="mt" tagdir="/WEB-INF/tags"%>
 
-<mt:masterpage title="Home">
+<mt:masterpage title="Home" menuid="menuHome">
 	<jsp:attribute name="content">	
 	<div class="ant-card ant-card-bordered">
 		<div class="ant-card-body">

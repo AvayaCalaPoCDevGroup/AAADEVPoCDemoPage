@@ -17,6 +17,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.HttpClients;
@@ -131,5 +132,30 @@ public class HttpTokenRequest {
         }
         //logger.info("Validate  " + result.toString());
         return new JSONObject(result.toString()).put("code", response.getStatusLine().getStatusCode());
+	}
+	
+	public String createNewUser(String json) throws ClientProtocolException, IOException {
+		final String URI = "https://breeze2-196.collaboratory.avaya.com/services/AAADEVOAuth2/AutenticationAccessControl";
+		final HttpClient client = HttpClients.custom()
+				//.setSSLContext(sslContextAssistant)
+				.setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
+		final HttpPost postMethod = new HttpPost(URI);
+		postMethod.addHeader("Authorization", "Basic " + Constants.TOKEN_OAUTH);
+		MultipartEntityBuilder reqEntity = MultipartEntityBuilder.create();
+		StringBody actionPart = new StringBody(Constants.CREATE_ACTION, ContentType.TEXT_PLAIN);
+		StringBody jsonPart = new StringBody(json, ContentType.TEXT_PLAIN);
+		reqEntity.addPart(Constants.LOG_IN_ACTION, actionPart);
+		reqEntity.addPart(Constants.CREATE_JSON, jsonPart);
+		HttpEntity entity = reqEntity.build();	
+        postMethod.setEntity(entity);
+        final HttpResponse response = client.execute(postMethod);
+        final BufferedReader inputStream = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), StandardCharsets.ISO_8859_1));
+        String line = "";
+        final StringBuilder result = new StringBuilder();
+        while ((line = inputStream.readLine()) != null) {
+            result.append(line);
+        }
+        //logger.info("Validate  " + result.toString());
+        return result.toString();
 	}
 }

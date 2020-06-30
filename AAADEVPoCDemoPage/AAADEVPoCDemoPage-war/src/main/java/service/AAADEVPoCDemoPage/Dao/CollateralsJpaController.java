@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
@@ -32,18 +33,23 @@ public class CollateralsJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Collaterals collaterals) {
+    public Collaterals create(Collaterals collaterals) {
         EntityManager em = null;
-        try {
+        Collaterals resp = null;
+//        try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(collaterals);
+            em.flush();
+            resp = collaterals;
             em.getTransaction().commit();
-        } finally {
+//        } finally {
             if (em != null) {
                 em.close();
             }
-        }
+//        }
+        
+        return resp;
     }
 
     public void edit(Collaterals collaterals) throws NonexistentEntityException, Exception {
@@ -69,8 +75,9 @@ public class CollateralsJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public boolean destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
+        boolean resp = false;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
@@ -83,11 +90,13 @@ public class CollateralsJpaController implements Serializable {
             }
             em.remove(collaterals);
             em.getTransaction().commit();
+            resp =  true;
         } finally {
             if (em != null) {
                 em.close();
             }
         }
+        return resp;
     }
 
     public List<Collaterals> findCollateralsEntities() {
@@ -138,13 +147,31 @@ public class CollateralsJpaController implements Serializable {
 
     public List<Collaterals> obtenerCollateralsPorIdDemo(String idDemo) {
         EntityManager em = getEntityManager();
-        TypedQuery<Collaterals> namedQuery = em.createNamedQuery("Collaterals.findByIddemo", Collaterals.class);
-        namedQuery.setParameter("iddemo", idDemo);
-        List<Collaterals> result = namedQuery.getResultList();
+        List<Collaterals> result = em.createNativeQuery("SELECT c.id, c.type, c.title, c.updatedtime, c.iddemo, null as file, c.filetype FROM Collaterals c WHERE c.iddemo = '"+idDemo+"'", Collaterals.class).getResultList();
+        
         if (!result.isEmpty()) {
             return result;
         }
         return new ArrayList<>();
     }
-
+    
+    public Collaterals obtenerCollateralsPorIdEIdDemo(Long id) {
+        EntityManager em = getEntityManager();
+        Collaterals collateral = null;
+        try {
+        	TypedQuery<Collaterals> namedquery = em.createNamedQuery("Collaterals.findById", Collaterals.class);
+        	namedquery.setParameter("id", id);
+        	List<Collaterals> result = namedquery.getResultList();
+        	if (!result.isEmpty()) {
+                collateral = result.get(0);
+            }
+        } catch (NoResultException ex) {
+			System.out.println("repositorio create or update, Sin resultados");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("repositorio create or update, exception: " + e.getMessage());
+			
+		}
+        return collateral;
+    }
 }

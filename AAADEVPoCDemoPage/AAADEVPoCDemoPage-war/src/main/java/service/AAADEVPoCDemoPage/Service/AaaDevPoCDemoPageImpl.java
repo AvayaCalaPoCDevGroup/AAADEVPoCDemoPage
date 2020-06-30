@@ -163,4 +163,35 @@ public class AaaDevPoCDemoPageImpl implements IAaaDevPoCDemoPage {
 		return resp;
 	}
 
+	@Override
+	public Collaterals crearColateral(Collaterals collateral) {
+		// TODO Auto-generated method stub
+		Collaterals resp = null;
+		
+		resp = new CollateralsJpaController(emf).create(collateral);
+		
+		return resp;
+	}
+
+	@Override
+	public Collaterals getByIdDemoAndId(Long id) {
+		// TODO Auto-generated method stub
+		Collaterals resp = null;
+		resp = new CollateralsJpaController(emf).obtenerCollateralsPorIdEIdDemo(id);
+		return resp;
+	}
+
+	@Override
+	public boolean deleteCollateral(Long id) {
+		// TODO Auto-generated method stub
+				boolean resp = false;
+				try {
+					resp = new CollateralsJpaController(emf).destroy(id);
+				} catch (NonexistentEntityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return resp;
+	}
+
 }

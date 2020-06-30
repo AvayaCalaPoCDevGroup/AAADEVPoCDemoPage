@@ -44,6 +44,9 @@ public class SnapIns extends HttpServlet {
             List<Components> componentes = new AaaDevPoCDemoPageImpl().obtenerComponentesPorIdDemo(Long.toString(demo.getId()));
             jsonObject.put("componentDetails", new JSONArray(new Gson().toJson(componentes)));
             List<Collaterals> collaterals = new AaaDevPoCDemoPageImpl().obtenerTodosLosCollateralsPorIdDemo(Long.toString(demo.getId()));
+//            for (Collaterals unit : collaterals) {
+//				unit = (Collaterals)unit;
+//			}
             jsonObject.put("collaterals", new JSONArray(new Gson().toJson(collaterals)));
             
             List<Tag> tags = new AaaDevPoCDemoPageImpl().obtenerTagsPorIdDemo(Long.toString(demo.getId()));
